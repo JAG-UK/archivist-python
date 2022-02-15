@@ -1,0 +1,38 @@
+operations:
+
+  # create some policies
+  - operation: CREATE_DYNAMIC_COMPLIANCE_POLICY
+    to_print: Create a compliance policy that checks vaults are closed within a reasonable time frame.
+    policy_id: door close policy 1
+    description: door close policy
+    display_name: door close policy
+    policy_type: COMPLIANCE_DYNAMIC_TOLERANCE
+    asset_filter:
+      - or:
+        - attributes.arc_display_type=Bank Vault Door
+    event_display_type: Open Vault
+    closing_event_display_type:  Close Vault
+    dynamic_window: 604800 # Covers the past week
+    dynamic_variability: 1.5 # 150%  tolerance from the stddev away from the mean
+
+
+  - operation: LOAD_ASSET
+    to_print: Load Bank of England
+    asset_id: england
+    identity: assets/60d74d75-4454-4ea1-9f04-a4b2fced4156
+
+
+  - operation: LOAD_ASSET
+    to_print: Load Bank of Elbonia
+    asset_id: elbonia
+    identity: assets/f0fa6a0e-77c1-4f1a-8597-6a8c29f45907
+
+
+  # check compliance for each vault
+  - operation: CHECK_COMPLIANCE
+    to_print: Check Compliance of Bank of England
+    asset_id: england
+
+  - operation: CHECK_COMPLIANCE
+    to_print: Check Compliance of Bank of Elbonia
+    asset_id: elbonia

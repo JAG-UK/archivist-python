@@ -1,0 +1,52 @@
+operations:
+
+  # create some policies
+  - operation: CREATE_RICHNESS_COMPLIANCE_POLICY
+    to_print: Create a compliance policy that checks the driver is at least 35.
+    policy_id: driver age policy
+    description: Compliance policy that checks the driver is at least 35
+    display_name: Rental minimum age policy
+    policy_type: COMPLIANCE_RICHNESS
+    asset_filter:
+      - or:
+        - attributes.arc_display_type=Driving License
+    richness_assertions:
+      - or: 
+        - birth_year<1986
+
+
+  - operation: CREATE_RICHNESS_COMPLIANCE_POLICY
+    to_print: Create a compliance policy that checks the license is still valid.
+    policy_id: license expiry policy
+    description: Compliance policy that checks the license is still valid
+    display_name: License expiry policy
+    policy_type: COMPLIANCE_RICHNESS
+    asset_filter:
+      - or:
+        - attributes.arc_display_type=Driving License
+    richness_assertions:
+      - or: 
+        - expiry_year>2021
+
+
+  - operation: LOAD_ASSET
+    to_print: Load Paul.
+    asset_id: paul
+    identity: assets/7244a4c6-bf84-470a-9240-d53325c68058
+
+
+  - operation: LOAD_ASSET
+    to_print: Load Helene
+    asset_id: helene
+    identity: assets/bd5479e6-657d-4d7f-a1dc-52ee9867f681
+  
+
+  # check compliance for all 3 cards
+  - operation: CHECK_COMPLIANCE
+    to_print: Check Compliance of Paul
+    asset_id: paul
+
+  - operation: CHECK_COMPLIANCE
+    to_print: Check Compliance of Helene
+    asset_id: helene
+

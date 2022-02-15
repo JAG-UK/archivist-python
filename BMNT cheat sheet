@@ -1,0 +1,23 @@
+# Refresh Authorization
+./getauth.sh playground-poc jill > .jill
+
+# To see all the compliance policies
+curl -H "Authorization: Bearer $(cat .jill)" -H "Content-Type: application/json" https://rkvst.poc.jitsuin.io/archivist/v1/compliance_policies | jq
+
+# AMM Top Trump dealer check compliance of Top Trumps
+python3 ./compliance_demo.py https://rkvst.poc.jitsuin.io .jill top_trumps_check.yaml 2> reasondbg
+
+# Bank Vault Compliance Audit
+python3 ./compliance_demo.py https://rkvst.poc.jitsuin.io .jill bankvaults_check.yaml 2> reasondbg 
+
+# To test compliance of the Peugeot 504i Top Trump now
+curl -H "Authorization: Bearer $(cat .jill)" -H "Content-Type: application/json" https://rkvst.poc.jitsuin.io/archivist/v1/compliance/assets/8eea6117-5039-4356-b3c1-60517dc175fc | jq
+
+# To test compliance of the Peugeot 504i Top Trump at a time in the past (15:45 Friday)
+curl -H "Authorization: Bearer $(cat .jill)" -H "Content-Type: application/json" https://rkvst.poc.jitsuin.io/archivist/v1/compliance/assets/8eea6117-5039-4356-b3c1-60517dc175fc?compliant_at=2021-06-23T15:30:00Z | jq
+
+# To see the state of the Peugeot 504i Top Trump at the time of the trade (15:53 Friday)
+curl -H "Authorization: Bearer $(cat .jill)" -H "Content-Type: application/json" https://rkvst.poc.jitsuin.io/archivist/v2/assets/8eea6117-5039-4356-b3c1-60517dc175fc?at_time=2021-07-23T14:53:00Z | jq 
+
+# To investigate what happened look up all the events that modified the weight attribute
+curl -H "Authorization: Bearer $(cat .jill)" -H "Content-Type: application/json" https://rkvst.poc.jitsuin.io/archivist/v2/assets/8eea6117-5039-4356-b3c1-60517dc175fc/events?asset_attributes.weight=* | jq 

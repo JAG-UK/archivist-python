@@ -1,0 +1,22 @@
+operations:
+
+  - operation: LOAD_ASSET
+    to_print: Load Bank of England
+    asset_id: england
+    identity: assets/60d74d75-4454-4ea1-9f04-a4b2fced4156
+
+
+  - operation: LOAD_ASSET
+    to_print: Load Bank of Elbonia
+    asset_id: elbonia
+    identity: assets/f0fa6a0e-77c1-4f1a-8597-6a8c29f45907
+
+
+  # check compliance for each vault
+  - operation: CHECK_COMPLIANCE
+    to_print: Check Compliance of Bank of England
+    asset_id: england
+
+  - operation: CHECK_COMPLIANCE
+    to_print: Check Compliance of Bank of Elbonia
+    asset_id: elbonia

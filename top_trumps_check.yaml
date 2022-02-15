@@ -1,0 +1,32 @@
+operations:
+
+  - operation: LOAD_ASSET
+    to_print: Load Peugeot 504i.
+    asset_id: peugeot
+    identity: assets/8eea6117-5039-4356-b3c1-60517dc175fc
+
+
+  - operation: LOAD_ASSET
+    to_print: Datsun 260 Z.
+    asset_id: datsun
+    identity: assets/a584f894-26be-4757-adf0-c25e9060a376
+
+
+  - operation: LOAD_ASSET
+    to_print: Load Opel Kadett Rallye 1900.
+    asset_id: opel
+    identity: assets/c18646dd-552b-41a8-9839-71ad5468cd43
+  
+
+  # check compliance for all 3 bags
+  - operation: CHECK_COMPLIANCE
+    to_print: Check Compliance of Peugeot 504i.
+    asset_id: peugeot
+
+  - operation: CHECK_COMPLIANCE
+    to_print: Check Compliance of Datsun 260 Z.
+    asset_id: datsun
+
+  - operation: CHECK_COMPLIANCE
+    to_print: Check Compliance of Opel Kadett Rallye 1900.
+    asset_id: opel

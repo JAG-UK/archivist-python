@@ -30,6 +30,7 @@
 """
 
 import json
+import sys
 from os.path import isfile as os_path_isfile
 
 from flatten_dict import flatten
@@ -181,6 +182,7 @@ class Archivist:  # pylint: disable=too-many-instance-attributes
         if error is not None:
             raise error
 
+        print(f">>> {response.json()}", file=sys.stderr)
         return response.json()
 
     def get_file(self, subpath, identity, fd, *, headers=None):
@@ -231,6 +233,7 @@ class Archivist:  # pylint: disable=too-many-instance-attributes
 
         """
 
+        print(f"+++ {json.dumps(request)}", file=sys.stderr)
         response = requests.post(
             SEP.join((self.url, ROOT, path)),
             data=json.dumps(request),
@@ -243,6 +246,7 @@ class Archivist:  # pylint: disable=too-many-instance-attributes
         if error is not None:
             raise error
 
+        print(f">>> {response.json()}", file=sys.stderr)
         return response.json()
 
     def post_file(self, path, fd, mtype):
@@ -325,6 +329,7 @@ class Archivist:  # pylint: disable=too-many-instance-attributes
 
         """
 
+        print(f"+++ {json.dumps(request)}", file=sys.stderr)
         response = requests.patch(
             SEP.join((self.url, ROOT, subpath, identity)),
             data=json.dumps(request),
@@ -337,6 +342,7 @@ class Archivist:  # pylint: disable=too-many-instance-attributes
         if error is not None:
             raise error
 
+        print(f">>> {response.json()}", file=sys.stderr)
         return response.json()
 
     def __list(self, path, args, *, headers=None):
@@ -353,6 +359,7 @@ class Archivist:  # pylint: disable=too-many-instance-attributes
         if error is not None:
             raise error
 
+        print(f">>> {response.json()}", file=sys.stderr)
         return response
 
     @staticmethod
